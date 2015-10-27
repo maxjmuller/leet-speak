@@ -1,41 +1,34 @@
-describe('replaceE', function() {
-  it("replaces the letter 'e' with '3'", function() {
-    expect(replaceE("egg")).to.equal("3gg");
-  });
-});
+var translate = function(text){
+  if (!text) {
+    return promptForInput;
+  }
+  else {
+    // replaceE(text);
+    // var text = text.replace("e","3");
+    return replaceE(text);
+  }
 
-describe('replaceO', function() {
-  it("replaces the letter 'o' with '0'", function() {
-    expect(replace0("zoo")).to.equal("z00");
-  });
-});
+};
+var promptForInput = function(){
+  var textPrompt = "Please enter text or a phrase.";
+  alert(textPrompt);
+  return textPrompt;
+};
 
-describe('replaceI', function() {
-  it("replaces the letter 'I' with '1'", function() {
-    expect(replaceI("Indiana")).to.equal("1ndiana");
-  });
-});
+var replaceE = function(text){
+  return text.replace("e","3");
 
-describe('replaceS', function() {
-  it("replaces the letter 's' with 'z'", function() {
-    expect(replaceS("cats")).to.equal("catz");
-  });
-});
+};
 
-describe('replaceS', function() {
-  it("doesn't replace the letter 's' if it is the first letter in the word", function() {
-    expect(replaceS("sex")).to.equal("sex");
-  });
-});
 
-describe('promptForInput', function() {
-  it("prompts the user if input is null", function() {
-    expect(promptForInput("")).to.equal("Please enter text or a phrase.");
-  });
-});
+$(document).ready(function() {
+  $("form#leetspeak").submit(function(event) {
+    var text = $("input#text").val();
+    var translation = translate(text);
 
-describe('translator', function() {
-  it("returns the user's input if no rules are matched", function() {
-    expect(translator("cat")).to.equal("cat");
+    $(".text").text(text);
+    $(".translation").text(translation);
+    $("#translation").show();
+    event.preventDefault();
   });
 });
